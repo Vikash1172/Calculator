@@ -1,38 +1,202 @@
-.App {
+
+*{
+  box-sizing:border-box;
+  border-radius: 16px;
+  color: white;
   text-align: center;
-}
+  text-transform: capitalize;
+  font-size: 24px;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
+a{
+  text-decoration: none;
+  color: white;}
+body{
+  padding: 0;
+  margin: 0;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h3{
+  margin:0;
+}
+header{
+  background-color: rgb(0, 79, 0);
+  margin:1rem 0.5rem 0 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+}
+header a{
+  margin: 0 1rem 0 1rem;
+  font-size: 24px;
+  padding: 0;
+}
+.logo img{
+  width: 5rem;
+  height: 3rem;
+  margin:0 1rem 0 3rem;
+  padding: 0;
+}
+header .remaining{
+  margin-right: 1rem;
+}
+main{
+  display: flex;
+  justify-content: space-between;
+}
+.left{
+  background-color: rgb(0, 115, 154);
+  width: 20%;
+  margin: 1rem 0.5rem 0 0.5rem;
+  padding: 1rem;
+  
+}
+.box{
+  background-color: white;
+  margin: 0.25rem 0.25rem 0.25rem 0.25rem;
+  height: 10rem;
+  width: auto;
+  color: purple;
+}
+.right{
   display: flex;
   flex-direction: column;
+  width: 80%;
+}
+.nav{
+  background-color: rgb(6, 0, 128);
+  margin:1rem 0.5rem 0 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.nav a{
+  text-decoration: none;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.Garticle{
+  background-color: purple;
+  margin:1rem 0.5rem 0 0.5rem;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 24% 24% 24% 24% ;
 }
+.article{
+  background-color: white;
+  border: none;
+  box-shadow: 2px 2px 2px 2px black;
+  margin: 0.5rem 0.5rem 0 0.5rem;
+  color: purple;
+  border-radius: 0;
+}
+.article h3{
+  color: purple;
+}
+.Garticle p{
+  font-size: 24px;
+  text-transform: none;
+}
+footer{
+  background-color: rgb(53, 53, 53);
+  margin:1rem 0.5rem 1rem 0.5rem;
+  padding: .5em;
+}
+@media screen and (max-width: 600px){
+  main{
+      flex-direction: column;
+  }
+  .left{
+      width: auto;
+      display: grid;
+      grid-template-columns: 100%;
+      
+  }
+  .right{
+      width: 100%;
+  }
+  .Garticle{
+      grid-template-columns: 100%;
+  }
+  header .remaining a{
+      font-size: 16px;
+      margin: 0 0.25rem 0.25rem 0;
+  }
+  header .logo img{
+      width: 3rem;
+      margin:0 1rem 0 1rem;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  header .remaining{
+      display: flex;
+      flex-direction: column;
+
+      
   }
+  header{
+      justify-content: space-evenly;
+  }
+  .nav{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+  }
+  
+}
+@media screen and (max-width: 768px)and (min-width: 600px){
+  main{
+      flex-direction: column;
+  }
+  .left{
+      width: auto;
+      display: grid;
+      grid-template-columns: 100%;
+      
+  }
+  .right{
+      width: 100%;
+  }
+  .Garticle{
+      grid-template-columns: 100%;
+  }
+
+  header .remaining a{
+      font-size: 16px;
+      margin: 0 0.25rem 0 0;
+  }
+  header .logo img{
+      width: 3rem;
+      margin:0 1rem 0 1rem;
+
+  }
+  
+}
+@media screen and (max-width: 1500px)and (min-width: 768px){
+  main{
+      flex-direction: column;
+      
+  }
+  .left{
+      width: auto;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      
+  }
+  .right{
+      width: 100%;
+  }
+  .Garticle{
+      grid-template-columns: 50% 50%;
+  }
+  header .remaining a{
+      font-size: 16px;
+  }
+  header .logo img{
+      width: 3rem;
+      margin:0 1rem 0 1rem;
+
+  }
+  
 }
