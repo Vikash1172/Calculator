@@ -60,6 +60,9 @@ function App() {
   function dot(){
     setText(text+".");
   }
+  function arrow(){
+    setText(text.slice(0,text.length-1));
+  }
   function equal(){
     let a = [];
     let o = [];
@@ -85,7 +88,6 @@ function App() {
     indices=o.map((e,i)=>e==="%"?i:-1).filter(e=>e!==-1);
     if(indices.length>0){
       for(let i=0;i<indices.length;i++){
-        console.log(a);
         a[indices[i]] = a[indices[i]]*a[indices[i]+1]/100;
       }
       for(let i=0;i<indices.length;i++){
@@ -110,7 +112,6 @@ function App() {
       }
     }
     indices=o.map((e,i)=>e==="X"?i:-1).filter(e=>e!==-1);
-    console.log(indices);
     if(indices.length>0){
       for(let i =0;i<indices.length;i++){
         a[indices[i]] = a[indices[i]]*a[indices[i]+1];
@@ -133,30 +134,27 @@ function App() {
         o.splice(indices[i],1);}
     }
     indices=o.map((e,i)=>e==="-"?i:-1).filter(e=>e!==-1);
-    console.log(indices);
     if(indices.length>0){
       for(let i =0 ;i<indices.length;i++){
-        console.log(a);
         a[indices[i]] = a[indices[i]]-a[indices[i]+1];
-        console.log(a);
       }
       for(let i=0;i<indices.length;i++){
         a.splice(indices[i]+1,1);
         o.splice(indices[i],1); 
       }
     }
-
-    console.log(a);
     setText(a[0]);
   }
   return (
+    <div className="App">
     <div className="container">
+        <h3>Vikash Mehra</h3>
         <div className="input" id='input' >
             <input type="text" placeholder="0" value={text}/>
         </div>
         <div className="button">
             <button Id="C" onClick={C}>C</button>
-            <button Id="arrow">+-</button>
+            <button Id="arrow" onClick={arrow}><i class="fa-solid fa-delete-left"></i></button>
             <button Id="percent" onClick={percent}>%</button>
             <button Id="divide" onClick={divide}>/</button>
             <button Id="seven" onClick={seven}>7</button>
@@ -177,6 +175,7 @@ function App() {
 
         </div>
     </div>
+</div>
 
   );
 }
