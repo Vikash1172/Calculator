@@ -1,7 +1,8 @@
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import CalculatorBody from './Components/CalculatorBody';
 import React, { useState } from 'react';
+
 
 
 
@@ -48,13 +49,16 @@ function App() {
     setText(text+"-");
   }
   function multiply(){
-    setText(text+"*");
+    setText(text+"X");
   }
   function divide(){
     setText(text+"/");
   }
   function percent(){
     setText(text+"%");
+  }
+  function dot(){
+    setText(text+".");
   }
   function equal(){
     let a = [];
@@ -64,7 +68,7 @@ function App() {
     let i = 0;
     while (i < s.length) {
         if (["+", "-", "X", "/", "%"].includes(s[i])) {
-            a.push(parseInt(s.slice(0, i)));
+            a.push(parseFloat(s.slice(0, i)));
             o.push(s[i]);
             s = s.slice(i + 1, s.length);
             i = 0;
@@ -74,31 +78,77 @@ function App() {
         }
     }
 
-    a.push(parseInt(s));
+    a.push(parseFloat(s));
 
-    let ans = a[0];
-    for (let i = 0; i < o.length; i++) {
-        if (o[i] == "+") {
-            ans += a[i + 1];
-        }
-        if (o[i] == "-") {
-            ans -= a[i + 1];
-        }
-        if (o[i] == "X") {
-            ans *= a[i + 1];
-        }
-        if (o[i] == "/") {
-            ans /= a[i + 1];
-        }
-        if (o[i] == "%") {
-            ans %= a[i + 1];
-        }
+  
+    let indices={};
+    indices=o.map((e,i)=>e==="%"?i:-1).filter(e=>e!==-1);
+    if(indices.length>0){
+      for(let i=0;i<indices.length;i++){
+        console.log(a);
+        a[indices[i]] = a[indices[i]]*a[indices[i]+1]/100;
+      }
+      for(let i=0;i<indices.length;i++){
+        a.splice(indices[i]+1,1);
+        o.splice(indices[i],1);
+      }
     }
-    setText(ans);
+    indices=o.map((e,i)=>e==="/"?i:-1).filter(e=>e!==-1);
+    if(indices.length>0){
+      for(let i=0;i<indices.length;i++){
+        if(a[i+1]==0){
+          setText("ZeroDivisionError");
+          return;
+        }
+        else{
+          a[indices[i]] = a[indices[i]]/a[indices[i]+1];
+        }
+      }
+      for(let i=0;i<indices.length;i++){
+        a.splice(indices[i]+1,1);
+        o.splice(indices[i],1);
+      }
+    }
+    indices=o.map((e,i)=>e==="X"?i:-1).filter(e=>e!==-1);
+    console.log(indices);
+    if(indices.length>0){
+      for(let i =0;i<indices.length;i++){
+        a[indices[i]] = a[indices[i]]*a[indices[i]+1];
+       
+      }
+      for(let i=0;i<indices.length;i++){
+        a.splice(indices[i]+1,1);
+        o.splice(indices[i],1);
+      }
+    }
+
+    indices=o.map((e,i)=>e==="+"? i:-1).filter(e=>e!==-1);
+    if(indices.length>0){
+      for(let i=0;i<indices.length;i++){
+        a[indices[i]] = a[indices[i]]+a[indices[i]+1];
+        
+      }
+      for(let i=0;i<indices.length;i++){
+        a.splice(indices[i]+1,1);
+        o.splice(indices[i],1);}
+    }
+    indices=o.map((e,i)=>e==="-"?i:-1).filter(e=>e!==-1);
+    console.log(indices);
+    if(indices.length>0){
+      for(let i =0 ;i<indices.length;i++){
+        console.log(a);
+        a[indices[i]] = a[indices[i]]-a[indices[i]+1];
+        console.log(a);
+      }
+      for(let i=0;i<indices.length;i++){
+        a.splice(indices[i]+1,1);
+        o.splice(indices[i],1); 
+      }
+    }
+
+    console.log(a);
+    setText(a[0]);
   }
-
-
-
   return (
     <div className="container">
         <div className="input" id='input' >
@@ -122,7 +172,7 @@ function App() {
             <button Id="three" onClick={three}>3</button>
             <button Id="plus" onClick={plus}>+</button>
             <button Id="zero" onClick={zero}>0</button>
-            <button Id="dot">.</button>
+            <button Id="dot" onClick={dot}>.</button>
             <button Id="equal" onClick={equal}>=</button>
 
         </div>
