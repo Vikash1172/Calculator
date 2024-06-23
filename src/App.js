@@ -97,20 +97,24 @@ function App() {
     }
     indices=o.map((e,i)=>e==="/"?i:-1).filter(e=>e!==-1);
     if(indices.length>0){
-      for(let i=0;i<indices.length;i++){
-        if(a[i+1]==0){
-          setText("ZeroDivisionError");
-          return;
+      for(let j=0;j<2;j++){
+        for(let i=0;i<indices.length;i+=2){
+          if(a[i+1]==0){
+            setText("ZeroDivisionError");
+            return;
+          }
+          else{
+            a[indices[i]] = a[indices[i]]/a[indices[i]+1];
+          }
         }
-        else{
-          a[indices[i]] = a[indices[i]]/a[indices[i]+1];
+  
+        for(let i=0;i<indices.length;i++){
+          a.splice(indices[i]+1,1);
+          o.splice(indices[i],1);
         }
-      }
-      for(let i=0;i<indices.length;i++){
-        a.splice(indices[i]+1,1);
-        o.splice(indices[i],1);
-      }
+        indices=indices.filter((e,index)=>index%2!==0);
     }
+  }
     indices=o.map((e,i)=>e==="X"?i:-1).filter(e=>e!==-1);
     if(indices.length>0){
       for(let i =0;i<indices.length;i++){
@@ -120,6 +124,16 @@ function App() {
       for(let i=0;i<indices.length;i++){
         a.splice(indices[i]+1,1);
         o.splice(indices[i],1);
+      }
+    }
+    indices=o.map((e,i)=>e==="-"?i:-1).filter(e=>e!==-1);
+    if(indices.length>0){
+      for(let i =0 ;i<indices.length;i++){
+        a[indices[i]] = a[indices[i]]-a[indices[i]+1];
+      }
+      for(let i=0;i<indices.length;i++){
+        a.splice(indices[i]+1,1);
+        o.splice(indices[i],1); 
       }
     }
 
@@ -133,16 +147,7 @@ function App() {
         a.splice(indices[i]+1,1);
         o.splice(indices[i],1);}
     }
-    indices=o.map((e,i)=>e==="-"?i:-1).filter(e=>e!==-1);
-    if(indices.length>0){
-      for(let i =0 ;i<indices.length;i++){
-        a[indices[i]] = a[indices[i]]-a[indices[i]+1];
-      }
-      for(let i=0;i<indices.length;i++){
-        a.splice(indices[i]+1,1);
-        o.splice(indices[i],1); 
-      }
-    }
+
     setText(a[0]);
   }
   return (
@@ -179,5 +184,6 @@ function App() {
 
   );
 }
+
 
 export default App;
